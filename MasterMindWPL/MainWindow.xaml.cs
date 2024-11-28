@@ -275,5 +275,20 @@ namespace MasterMindWPL
                 TxtCode.Text = TxtCode.Text + $" {color}";
             }
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxButton buttons = MessageBoxButton.YesNo;
+            MessageBoxImage messageBoxImage = MessageBoxImage.Warning;
+            MessageBoxResult result = MessageBox.Show("Wilt u het spel vroegtijdig beëindigen?", $"Poging: {_attempts}/10", buttons, messageBoxImage);
+            if (result == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown();
+            }
+            else if (result == MessageBoxResult.No)
+            {
+                e.Cancel = true;
+            } 
+        }
     }
 }
