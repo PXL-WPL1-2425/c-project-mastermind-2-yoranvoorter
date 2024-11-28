@@ -54,6 +54,7 @@ namespace MasterMindWPL
 
         public void GenerateRandomCode()
         {
+            _code.Clear();
             Random rand = new Random();
             for (int i = 0; i < 4; i++)
             {
@@ -99,9 +100,11 @@ namespace MasterMindWPL
 
         private void btnCheckCode_Click(object sender, RoutedEventArgs e)
         {
+            int rightGuesses = 0;
             if (_code[0] == cboColors1.SelectedItem)
             {
                 ellipseColor1.Stroke = new SolidColorBrush(Colors.DarkRed);
+                rightGuesses++;
             }
             else if (_code.Contains(cboColors1.SelectedItem))
             {
@@ -117,6 +120,7 @@ namespace MasterMindWPL
             if (_code[1] == cboColors2.SelectedItem)
             {
                 ellipseColor2.Stroke = new SolidColorBrush(Colors.DarkRed);
+                rightGuesses++;
             }
             else if (_code.Contains(cboColors2.SelectedItem))
             {
@@ -132,6 +136,7 @@ namespace MasterMindWPL
             if (_code[2] == cboColors3.SelectedItem)
             {
                 ellipseColor3.Stroke = new SolidColorBrush(Colors.DarkRed);
+                rightGuesses++;
             }
             else if (_code.Contains(cboColors3.SelectedItem))
             {
@@ -147,6 +152,7 @@ namespace MasterMindWPL
             if (_code[3] == cboColors4.SelectedItem)
             {
                 ellipseColor4.Stroke = new SolidColorBrush(Colors.DarkRed);
+                rightGuesses++;
             }
             else if (_code.Contains(cboColors4.SelectedItem))
             {
@@ -158,7 +164,7 @@ namespace MasterMindWPL
                 ellipseColor4.Stroke = null;
                 _score -= 2;
             }
-            CheckAttempt();
+            CheckAttempt(rightGuesses);
             AddToHistory(ellipseColor1, ellipseColor2, ellipseColor3, ellipseColor4);
         }
 
@@ -176,16 +182,45 @@ namespace MasterMindWPL
             }
         }
 
-        public void CheckAttempt()
+        public void CheckAttempt(int right)
         {
+            string codeString = "";
+
+            foreach(string color in _code)
+            {
+                codeString = codeString + $" {color}";
+            }
+
             if (_attempts < 10)
             {
-                _attempts++;
+                if (right == 4)
+                {
+                    MessageBoxButton buttons = MessageBoxButton.YesNo;
+                    MessageBoxResult result = MessageBox.Show($"Code is gekraakt in {_attempts} pogingen. Wil je nog eens?", "WINNER", buttons, MessageBoxImage.Information);
+                    if (result == MessageBoxResult.Yes) 
+                    {
+                        RestartGame();
+                    }
+                    else if (result == MessageBoxResult.No)
+                    {
+                        Application.Current.Shutdown();
+                    }
+                }
             }
             else
             {
-                MessageBox.Show("Je hebt het maximaal aantal pogingen bereikt.");
+                MessageBoxButton buttons = MessageBoxButton.YesNo;
+                MessageBoxResult result = MessageBox.Show($"You failed! De correcte code was {codeString}.\n Nog eens proberen?", "FAILED", buttons, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    RestartGame();
+                }
+                else if (result == MessageBoxResult.No)
+                {
+                    Application.Current.Shutdown();
+                }
             }
+            _attempts++;
             TxtPogingen.Text = $"Poging: {_attempts} / 10\nScore: {_score}";
         }
 
@@ -215,6 +250,30 @@ namespace MasterMindWPL
                 Stroke = strokeColor,
                 StrokeThickness = 4
             };
+        }
+
+        public void RestartGame() 
+        {
+            _attempts = 0;
+            _score = 100;
+            ListBoxHistoriek.Items.Clear();
+            ellipseColor1.Fill = null;
+            ellipseColor1.Stroke = null;
+            ellipseColor2.Fill = null;
+            ellipseColor2.Stroke = null;
+            ellipseColor3.Fill = null;
+            ellipseColor3.Stroke = null;
+            ellipseColor4.Fill = null;
+            ellipseColor4.Stroke = null;
+            GenerateRandomCode();
+
+            this.Title = "";
+
+            foreach (string color in _code)
+            {
+                this.Title = this.Title + " " + color;
+                TxtCode.Text = TxtCode.Text + $" {color}";
+            }
         }
     }
 }
