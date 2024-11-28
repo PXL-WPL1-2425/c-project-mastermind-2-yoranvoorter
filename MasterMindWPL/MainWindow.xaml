@@ -1,0 +1,33 @@
+﻿<Window x:Class="MasterMindWPL.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MasterMindWPL"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="Gray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ComboBox Name="cboColors1" SelectionChanged="cboColors1_SelectionChanged"></ComboBox>
+        <ComboBox Name="cboColors2"  Grid.Column="1" SelectionChanged="cboColors2_SelectionChanged"></ComboBox>
+        <ComboBox Name="cboColors3"  Grid.Column="2" SelectionChanged="cboColors3_SelectionChanged"></ComboBox>
+        <ComboBox Name="cboColors4" Grid.Column="3" SelectionChanged="cboColors4_SelectionChanged"></ComboBox>
+        <Ellipse Name="ellipseColor1" Grid.Row="1" Margin="50" StrokeThickness="5"></Ellipse>
+        <Ellipse Name="ellipseColor2" Grid.Row="1" Grid.Column="1" Margin="50" StrokeThickness="5"></Ellipse>
+        <Ellipse Name="ellipseColor3" Grid.Row="1" Grid.Column="2" Margin="50" StrokeThickness="5"></Ellipse>
+        <Ellipse Name="ellipseColor4" Grid.Row="1" Grid.Column="3" Margin="50" StrokeThickness="5"></Ellipse>
+        <Button Name="btnCheckCode" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="50,70" Click="btnCheckCode_Click">Check code</Button>
+        <TextBlock Name="TxtCode" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" KeyDown="TxtCode_KeyDown"></TextBlock>
+        <TextBlock Name="TxtPogingen" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+    </Grid>
+</Window>
