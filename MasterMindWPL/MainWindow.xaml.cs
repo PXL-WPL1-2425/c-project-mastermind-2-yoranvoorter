@@ -24,14 +24,16 @@ namespace MasterMindWPL
         List<string> _code = new List<string>();
         bool _isDebugMode = false;
         int _attempts;
+        int _score;
         public MainWindow()
         {
+            _score = 100;
             _attempts = 1;
             InitializeComponent();
             AddColorsToDictionary();
             FillComboBoxes();
             GenerateRandomCode();
-            TxtPogingen.Text = $"Poging: {_attempts} / 10";
+            TxtPogingen.Text = $"Poging: {_attempts} / 10\nScore: {_score}";
             foreach (string color in _code)
             {
                 this.Title = this.Title + " " + color;
@@ -104,10 +106,12 @@ namespace MasterMindWPL
             else if (_code.Contains(cboColors1.SelectedItem))
             {
                 ellipseColor1.Stroke = new SolidColorBrush(Colors.Wheat);
+                _score--;
             }
             else
             {
                 ellipseColor1.Stroke = null;
+                _score -= 2;
             }
 
             if (_code[1] == cboColors2.SelectedItem)
@@ -117,10 +121,12 @@ namespace MasterMindWPL
             else if (_code.Contains(cboColors2.SelectedItem))
             {
                 ellipseColor2.Stroke = new SolidColorBrush(Colors.Wheat);
+                _score--;
             }
             else
             {
                 ellipseColor2.Stroke = null;
+                _score -= 2;
             }
 
             if (_code[2] == cboColors3.SelectedItem)
@@ -130,10 +136,12 @@ namespace MasterMindWPL
             else if (_code.Contains(cboColors3.SelectedItem))
             {
                 ellipseColor3.Stroke = new SolidColorBrush(Colors.Wheat);
+                _score--;
             }
             else
             {
                 ellipseColor3.Stroke = null;
+                _score -= 2;
             }
 
             if (_code[3] == cboColors4.SelectedItem)
@@ -143,10 +151,12 @@ namespace MasterMindWPL
             else if (_code.Contains(cboColors4.SelectedItem))
             {
                 ellipseColor4.Stroke = new SolidColorBrush(Colors.Wheat);
+                _score--;
             }
             else
             {
                 ellipseColor4.Stroke = null;
+                _score -= 2;
             }
             CheckAttempt();
             AddToHistory(ellipseColor1, ellipseColor2, ellipseColor3, ellipseColor4);
@@ -176,7 +186,7 @@ namespace MasterMindWPL
             {
                 MessageBox.Show("Je hebt het maximaal aantal pogingen bereikt.");
             }
-            TxtPogingen.Text = $"Poging: {_attempts} / 10";
+            TxtPogingen.Text = $"Poging: {_attempts} / 10\nScore: {_score}";
         }
 
         public void AddToHistory(Ellipse ellipse1, Ellipse ellipse2, Ellipse ellipse3, Ellipse ellipse4)
