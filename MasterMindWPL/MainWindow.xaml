@@ -15,19 +15,21 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <ComboBox Name="cboColors1" SelectionChanged="cboColors1_SelectionChanged"></ComboBox>
         <ComboBox Name="cboColors2"  Grid.Column="1" SelectionChanged="cboColors2_SelectionChanged"></ComboBox>
         <ComboBox Name="cboColors3"  Grid.Column="2" SelectionChanged="cboColors3_SelectionChanged"></ComboBox>
         <ComboBox Name="cboColors4" Grid.Column="3" SelectionChanged="cboColors4_SelectionChanged"></ComboBox>
-        <Ellipse Name="ellipseColor1" Grid.Row="1" Margin="50" StrokeThickness="5"></Ellipse>
-        <Ellipse Name="ellipseColor2" Grid.Row="1" Grid.Column="1" Margin="50" StrokeThickness="5"></Ellipse>
-        <Ellipse Name="ellipseColor3" Grid.Row="1" Grid.Column="2" Margin="50" StrokeThickness="5"></Ellipse>
-        <Ellipse Name="ellipseColor4" Grid.Row="1" Grid.Column="3" Margin="50" StrokeThickness="5"></Ellipse>
-        <Button Name="btnCheckCode" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="50,70" Click="btnCheckCode_Click">Check code</Button>
-        <TextBlock Name="TxtCode" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" KeyDown="TxtCode_KeyDown"></TextBlock>
-        <TextBlock Name="TxtPogingen" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <Ellipse Name="ellipseColor1" Grid.Row="1" Width="80" Height="80" StrokeThickness="5"></Ellipse>
+        <Ellipse Name="ellipseColor2" Grid.Row="1" Grid.Column="1" Width="80" Height="80" StrokeThickness="5"></Ellipse>
+        <Ellipse Name="ellipseColor3" Grid.Row="1" Grid.Column="2" Width="80" Height="80" StrokeThickness="5"></Ellipse>
+        <Ellipse Name="ellipseColor4" Grid.Row="1" Grid.Column="3" Width="80" Height="80" StrokeThickness="5"></Ellipse>
+        <Button Name="btnCheckCode" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Click="btnCheckCode_Click">Check code</Button>
+        <TextBlock Name="TxtCode" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" KeyDown="TxtCode_KeyDown"></TextBlock>
+        <TextBlock Name="TxtPogingen" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <ListBox Grid.Row="2" Grid.Column="3" Name="ListBoxHistoriek" Background="Gray"></ListBox>
     </Grid>
 </Window>

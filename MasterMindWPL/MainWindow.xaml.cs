@@ -149,6 +149,7 @@ namespace MasterMindWPL
                 ellipseColor4.Stroke = null;
             }
             CheckAttempt();
+            AddToHistory(ellipseColor1, ellipseColor2, ellipseColor3, ellipseColor4);
         }
 
         public void ToggleDebug()
@@ -176,6 +177,34 @@ namespace MasterMindWPL
                 MessageBox.Show("Je hebt het maximaal aantal pogingen bereikt.");
             }
             TxtPogingen.Text = $"Poging: {_attempts} / 10";
+        }
+
+        public void AddToHistory(Ellipse ellipse1, Ellipse ellipse2, Ellipse ellipse3, Ellipse ellipse4)
+        {
+            StackPanel ellipsePanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(5)
+            };
+
+            ellipsePanel.Children.Add(CreateEllipse(ellipse1.Fill, ellipse1.Stroke));
+            ellipsePanel.Children.Add(CreateEllipse(ellipse2.Fill, ellipse2.Stroke));
+            ellipsePanel.Children.Add(CreateEllipse(ellipse3.Fill, ellipse3.Stroke));
+            ellipsePanel.Children.Add(CreateEllipse(ellipse4.Fill, ellipse4.Stroke));
+
+            ListBoxHistoriek.Items.Add(ellipsePanel);
+        }
+
+        public Ellipse CreateEllipse(Brush fillColor, Brush strokeColor)
+        {
+            return new Ellipse
+            {
+                Width = 40,
+                Height = 40,
+                Fill = fillColor,
+                Stroke = strokeColor,
+                StrokeThickness = 4
+            };
         }
     }
 }
